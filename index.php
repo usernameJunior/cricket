@@ -7,36 +7,9 @@
 
   <?php
   $players_file = 'data/players.json';
-  // decode JSON into array (pass 'true' as 2nd arg. to associative array)
   $players = json_decode(file_get_contents($players_file));
   ?>
   
-  <!-- JS -->
-  <script>
-    let player_nbr = <?php echo $players ? sizeof($players) : 1 ?>;
-
-    function addPlayer() {
-      player_nbr += 1;
-      // const new_player = `<span>Joueur ${player_nbr} :</span> <input type='text'><br>`;
-      // document.querySelector('.players-container')
-      //         .insertAdjacentHTML('beforeend', new_player);
-    
-      let label = document.createElement("label");
-      label.setAttribute("for", `player${player_nbr}`);
-      label.innerText = `Joueur ${player_nbr} : `;
-
-      let input = document.createElement("input");
-      input.setAttribute("type", "text");
-      input.setAttribute("name", `player${player_nbr}`);
-
-      let br = document.createElement("br");
-
-      const container = document.querySelector('.players-container')
-      container.appendChild(label)
-      container.appendChild(input)
-      container.appendChild(br);
-    }
-  </script>
   <title>Fléchettes</title>
 </head>
 
@@ -76,6 +49,27 @@
   
 
   <script>
+    let player_nbr = <?php echo $players ? sizeof($players) : 1 ?>;
+
+    function addPlayer() {
+      player_nbr += 1;
+      
+      let label = document.createElement("label");
+      label.setAttribute("for", `player${player_nbr}`);
+      label.innerText = `Joueur ${player_nbr} : `;
+
+      let input = document.createElement("input");
+      input.setAttribute("type", "text");
+      input.setAttribute("name", `player${player_nbr}`);
+
+      let br = document.createElement("br");
+
+      const container = document.querySelector('.players-container')
+      container.appendChild(label)
+      container.appendChild(input)
+      container.appendChild(br);
+    }
+
     add_player = document.getElementById('add-player');
     add_player.addEventListener('click', addPlayer);
   </script>
