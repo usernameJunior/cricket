@@ -40,7 +40,7 @@
                                 .map(score => score[0] * score[1])
         return subtotals.reduce((total, current) => total + current, 0);
       }
-      updateScore(score) {
+      checkIfScore(score) {
         this.scores[score] += 1;
         this.scoreCell.innerHTML = this.score;
       }
@@ -54,9 +54,8 @@
       constructor() {
         this.set_legend(); // sets legend column
         this.set_players(); // sets each player's column
-        this.container.addEventListener('click', this.checkScore);
+        this.container.addEventListener('click', this.clickScore);
       }
-      
       
       set_legend() {
         let cells = ['', '15', '16', '17', '18', '19', '20', 'B', '']
@@ -100,12 +99,34 @@
         });
       }
 
-      checkScore(e) {
+      clickScore(e) {
         if (!e.target.dataset.score) { return }
         
         let player = players[e.target.dataset.playerid];
-        player.updateScore(parseInt(e.target.dataset.score));
-        e.target.innerHTML = '<img src="../assets/images/slash.png" class="temp">';
+        if (!e.target.firstChild) {
+          let slash = document.createElement('img');
+          slash.setAttribute('src', '../assets/images/slash.png');
+          slash.setAttribute('class', 'temp');
+          slash.setAttribute('data-img', 'slash');
+          e.target.appendChild(slash);
+          player.checkIfScore(parseInt(e.target.dataset.score));
+        } else if (e.target.firstChild.dataset.img == 'slash') {
+          let cross = document.createElement('img');
+          cross.setAttribute('src', '../assets/images/cross.png');
+          cross.setAttribute('class', 'temp');
+          cross.setAttribute('data-img', 'cross');
+          e.target.replaceChildren(cross);
+          player.checkIfScore(parseInt(e.target.dataset.score));
+        } else if (e.target.firstChild.dataset.img == 'cross') {
+          let target = document.createElement('img');
+          target.setAttribute('src', '../assets/images/target.png');
+          target.setAttribute('class', 'temp');
+          target.setAttribute('data-img', 'target');
+          e.target.replaceChildren(target);
+          player.checkIfScore(parseInt(e.target.dataset.score));
+        } else {
+          player.checkIfScore(parseInt(e.target.dataset.score));
+        }
       }
     }
     coucou = new Plateau();
