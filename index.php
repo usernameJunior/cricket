@@ -64,9 +64,9 @@
 
       let br = document.createElement("br");
 
-      const container = document.querySelector('.players-container')
-      container.appendChild(label)
-      container.appendChild(input)
+      const container = document.querySelector('.players-container');
+      container.appendChild(label);
+      container.appendChild(input);
       container.appendChild(br);
     }
 
