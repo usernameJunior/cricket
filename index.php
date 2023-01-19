@@ -44,23 +44,23 @@
     </div>
     <input type="submit" value="Jouer">
   </form>
-  <button id="add-player">Ajouter un joueur</button>
+  <button id="add-player-btn">Ajouter un joueur</button>
 
   
 
   <script>
-    let player_nbr = <?php echo $players ? sizeof($players) : 1 ?>;
+    let playerNbr = <?php echo $players ? sizeof($players) : 1 ?>;
 
     function addPlayer() {
-      player_nbr += 1;
+      playerNbr += 1;
       
       let label = document.createElement("label");
-      label.setAttribute("for", `player${player_nbr}`);
-      label.innerText = `Joueur ${player_nbr} : `;
+      label.setAttribute("for", `player${playerNbr}`);
+      label.innerText = `Joueur ${playerNbr} : `;
 
       let input = document.createElement("input");
       input.setAttribute("type", "text");
-      input.setAttribute("name", `player${player_nbr}`);
+      input.setAttribute("name", `player${playerNbr}`);
 
       let br = document.createElement("br");
 
@@ -70,8 +70,8 @@
       container.appendChild(br);
     }
 
-    add_player = document.getElementById('add-player');
-    add_player.addEventListener('click', addPlayer);
+    const newPlayerEvt = document.getElementById('add-player-btn');
+    newPlayerEvt.addEventListener('click', addPlayer);
   </script>
 </body>
 </html>
