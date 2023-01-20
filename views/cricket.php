@@ -39,7 +39,7 @@
 
       get totalScore() {
         const subtotals = Object.entries(this.scores)
-                                .map(score => score[0] * (score[1] < 4 ? 0 : score[1] - 3))
+                                .map(score => score[0] * (score[1] < 4 ? 0 : score[1] - 3));
         return subtotals.reduce((total, current) => total + current, 0);
       }
 
@@ -69,7 +69,8 @@
             (players.map(player => player.totalScore)
                     .filter(tot => tot >= this.totalScore)
                     .length == 1)) {
-          alert(`${this.name.toUpperCase()} A GAGNEEEEEE !!!`)
+          alert(`${this.name.toUpperCase()} A GAGNEEEEEE !!!`);
+          plateau.container.removeEventListener('click', plateau.clickScore)
         }
       }
     }
@@ -161,7 +162,7 @@
         }
       }
     }
-    coucou = new Plateau();
+    plateau = new Plateau();
     </script>
 </body>
 </html>
