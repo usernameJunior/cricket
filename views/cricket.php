@@ -28,34 +28,44 @@
   </div>
 
   <script>
+
     class Player {
       constructor(name) {
         this.name = name;
         this.scores = { 15: 0, 16: 0, 17: 0, 18: 0, 19: 0, 20: 0, 25: 0 };
-        // the HTML elt that displays player's score, settled with Plateau
+        // the HTML elt that displays player's score, settled with Plateau instance
         this.scoreCell;
       }
-      get score() {
+
+      get totalScore() {
         const subtotals = Object.entries(this.scores)
-                                .map(score => score[0] * score[1])
+                                .map(score => score[0] * (score[1] < 4 ? 0 : score[1] - 3))
         return subtotals.reduce((total, current) => total + current, 0);
       }
-      checkIfScore(score) {
-        console.log('TODO')
-        // TODO:
-        // If other cells of this row has been closed
-          // return
-        // Else
-          // updateScore()
-          // Check if player has won
+
+      checkIfScore(score, players) {
+        if (this.checkRow(score, players)) {
+          this.updateScore(score)
+        }
+        // TODO: check if player has won
       }
+
+      // Returns true if one cell or more of the row is 'open' (score < 3)
+      checkRow(score, players) {
+        let rowScores = Object.values(players)
+                              .map(player => player.scores[score]);
+        return rowScores.filter(nbr => nbr < 3).length ? true : false
+      }
+
       updateScore(score) {
         this.scores[score] += 1;
-        this.scoreCell.innerHTML = this.score;
+        if (this.scores[score] > 3) {
+          this.scoreCell.innerHTML = this.totalScore;
+        }
       }
     }
 
-    players = <?php writePlayersArrayForJS() ?>.map(name => new Player(name));
+    let players = <?php writePlayersArrayForJS() ?>.map(name => new Player(name));
 
     class Plateau {
       container = document.getElementById('cricket-container');
@@ -78,7 +88,7 @@
         });
         this.container.appendChild(legendContainer);
       }
-      
+
       set_players() {
         players.forEach((player, id) => {
           let playerContainer = document.createElement('div');
@@ -100,7 +110,7 @@
           let playerScore = document.createElement('div');
           playerScore.setAttribute('class', 'player-cell');
           playerScore.setAttribute('data-playerid', id);
-          playerScore.innerHTML = player.score;
+          playerScore.innerHTML = player.totalScore;
           player.scoreCell = playerScore;
           playerContainer.appendChild(playerScore);
           
@@ -111,27 +121,33 @@
       clickScore(e) {
         if (!e.target.dataset.score) { return }
         
+        // TODO: replace conditions with score from player ?
+        // would eventually be clearer and remove need of data-img attribute
         let player = players[e.target.dataset.playerid];
+        let score = e.target.dataset.score
         if (!e.target.firstChild) {
           let slash = document.createElement('img');
+          player.updateScore(score);
           slash.setAttribute('src', '../assets/images/slash.png');
           slash.setAttribute('class', 'temp');
           slash.setAttribute('data-img', 'slash');
           e.target.appendChild(slash);
         } else if (e.target.firstChild.dataset.img == 'slash') {
           let cross = document.createElement('img');
+          player.updateScore(score);
           cross.setAttribute('src', '../assets/images/cross.png');
           cross.setAttribute('class', 'temp');
           cross.setAttribute('data-img', 'cross');
           e.target.replaceChildren(cross);
         } else if (e.target.firstChild.dataset.img == 'cross') {
           let target = document.createElement('img');
+          player.updateScore(score);
           target.setAttribute('src', '../assets/images/target.png');
           target.setAttribute('class', 'temp');
           target.setAttribute('data-img', 'target');
           e.target.replaceChildren(target);
         } else {
-          player.checkIfScore(parseInt(e.target.dataset.score));
+          player.checkIfScore(score, players);
         }
       }
     }
