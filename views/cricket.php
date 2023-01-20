@@ -41,6 +41,15 @@
         return subtotals.reduce((total, current) => total + current, 0);
       }
       checkIfScore(score) {
+        console.log('TODO')
+        // TODO:
+        // If other cells of this row has been closed
+          // return
+        // Else
+          // updateScore()
+          // Check if player has won
+      }
+      updateScore(score) {
         this.scores[score] += 1;
         this.scoreCell.innerHTML = this.score;
       }
@@ -109,21 +118,18 @@
           slash.setAttribute('class', 'temp');
           slash.setAttribute('data-img', 'slash');
           e.target.appendChild(slash);
-          player.checkIfScore(parseInt(e.target.dataset.score));
         } else if (e.target.firstChild.dataset.img == 'slash') {
           let cross = document.createElement('img');
           cross.setAttribute('src', '../assets/images/cross.png');
           cross.setAttribute('class', 'temp');
           cross.setAttribute('data-img', 'cross');
           e.target.replaceChildren(cross);
-          player.checkIfScore(parseInt(e.target.dataset.score));
         } else if (e.target.firstChild.dataset.img == 'cross') {
           let target = document.createElement('img');
           target.setAttribute('src', '../assets/images/target.png');
           target.setAttribute('class', 'temp');
           target.setAttribute('data-img', 'target');
           e.target.replaceChildren(target);
-          player.checkIfScore(parseInt(e.target.dataset.score));
         } else {
           player.checkIfScore(parseInt(e.target.dataset.score));
         }
