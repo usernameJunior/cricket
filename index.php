@@ -4,11 +4,77 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewporindext" content="width=device-width, initial-scale=1.0">
+  <link href="../assets/homepage.css" rel="stylesheet">
 
   <?php
-  $players_file = 'data/players.json';
-  $players = json_decode(file_get_contents($players_file));
+  // Found no better way to access file content with JS
+  function writePlayersArrayForJS() {
+    $players_file = 'data/players.json';
+    $players = json_decode(file_get_contents($players_file));
+      echo '[';
+    foreach ($players as $i => $player) {
+      echo '"' . $player . '"';
+      if ($i != sizeof($players) - 1) { echo ','; }
+    }
+    echo ']';
+  }
   ?>
+
+  <script>
+    let players = <?php writePlayersArrayForJS() ?>;
+    let playerNbr = 0;
+
+    function generatePlayerForm() {
+      // const container = document.getElementById('players-container');
+      // container.
+      if (players.length) {
+        players.forEach (player => {
+          addPlayer(player);
+        });
+      } else {
+        addPlayer();
+      }
+    }
+
+    function addPlayer(name = '') {
+      playerNbr += 1;
+
+      const playerContainer = document.createElement("div");
+      
+      const label = document.createElement("label");
+      label.setAttribute("for", `player${playerNbr}`);
+      label.innerText = `Joueur ${playerNbr} : `;
+
+      const input = document.createElement("input");
+      input.setAttribute("type", "text");
+      input.setAttribute("name", `player${playerNbr}`);
+      input.value = name;
+      
+
+      const deletePlayerBtn = document.createElement("p");
+      deletePlayerBtn.setAttribute("class", "delete-player-btn");
+      deletePlayerBtn.innerHTML = "X";
+      deletePlayerBtn.addEventListener('click', function(event) {
+        deletePlayer(event, deletePlayerBtn);
+      });
+      
+      const br = document.createElement("br");
+      
+      playerContainer.appendChild(label);
+      playerContainer.appendChild(input);
+      playerContainer.appendChild(deletePlayerBtn);
+      playerContainer.appendChild(br);
+
+      const container = document.getElementById('players-container');
+      container.appendChild(playerContainer);
+    }
+
+    function deletePlayer(event, btn) {
+      btn.removeEventListener('click', deletePlayer)
+      event.currentTarget.parentElement.remove();
+      playerNbr -= 1;
+    }
+  </script>
   
   <title>Fléchettes</title>
 </head>
@@ -18,60 +84,19 @@
 
   <form action="controllers/set_players.php"
         method="post">
-    <div class="players-container">
-      <?php
-      if ($players) {
-        foreach ($players as $index => $name) {
-          echo "
-          <label for=\"player" . $index + 1 . "\">
-            Joueur " . $index + 1 . " :
-          </label>
-          <input type=\"text\"
-                name=\"player" . $index + 1 . "\"
-                value=\"$name\">
-          <br>";
-        };
-      } else {
-        echo "
-        <label for=\"player1\">
-          Joueur 1 :
-        </label>
-        <input type=\"text\"
-              name=\"player1\">
-        <br>";
-      };
-      ?>
+    <div id="players-container">
+      <script> generatePlayerForm(); </script>
     </div>
     <input type="submit" value="Jouer">
+    <button id="add-player-btn" type="button">Ajouter un joueur</button>
   </form>
-  <button id="add-player-btn">Ajouter un joueur</button>
-
   
 
   <script>
-    let playerNbr = <?php echo $players ? sizeof($players) : 1 ?>;
-
-    function addPlayer() {
-      playerNbr += 1;
-      
-      let label = document.createElement("label");
-      label.setAttribute("for", `player${playerNbr}`);
-      label.innerText = `Joueur ${playerNbr} : `;
-
-      let input = document.createElement("input");
-      input.setAttribute("type", "text");
-      input.setAttribute("name", `player${playerNbr}`);
-
-      let br = document.createElement("br");
-
-      const container = document.querySelector('.players-container');
-      container.appendChild(label);
-      container.appendChild(input);
-      container.appendChild(br);
-    }
-
-    const newPlayerEvt = document.getElementById('add-player-btn');
-    newPlayerEvt.addEventListener('click', addPlayer);
+    const newPlayerBtn = document.getElementById('add-player-btn');
+    newPlayerBtn.addEventListener('click', (e) => {
+      addPlayer();
+    });
   </script>
 </body>
 </html>
