@@ -20,8 +20,8 @@
     echo ']';
   }
   ?>
-
 </head>
+
 <body>
   <div id="cricket-container">
     
@@ -136,26 +136,26 @@
         let player = players[e.target.dataset.playerid];
         let score = e.target.dataset.score
         if (!e.target.firstChild) {
-          let slash = document.createElement('img');
+          let imgOne = document.createElement('img');
           player.updateScore(score);
-          slash.setAttribute('src', '../assets/images/slash.png');
-          slash.setAttribute('class', 'temp');
-          slash.setAttribute('data-img', 'slash');
-          e.target.appendChild(slash);
-        } else if (e.target.firstChild.dataset.img == 'slash') {
-          let cross = document.createElement('img');
+          imgOne.setAttribute('src', '../assets/images/one.png');
+          imgOne.setAttribute('class', 'temp');
+          imgOne.setAttribute('data-img', 'one');
+          e.target.appendChild(imgOne);
+        } else if (e.target.firstChild.dataset.img == 'one') {
+          let imgTwo = document.createElement('img');
           player.updateScore(score);
-          cross.setAttribute('src', '../assets/images/cross.png');
-          cross.setAttribute('class', 'temp');
-          cross.setAttribute('data-img', 'cross');
-          e.target.replaceChildren(cross);
-        } else if (e.target.firstChild.dataset.img == 'cross') {
-          let target = document.createElement('img');
+          imgTwo.setAttribute('src', '../assets/images/two.png');
+          imgTwo.setAttribute('class', 'temp');
+          imgTwo.setAttribute('data-img', 'two');
+          e.target.replaceChildren(imgTwo);
+        } else if (e.target.firstChild.dataset.img == 'two') {
+          let imgThree = document.createElement('img');
           player.updateScore(score);
-          target.setAttribute('src', '../assets/images/target.png');
-          target.setAttribute('class', 'temp');
-          target.setAttribute('data-img', 'target');
-          e.target.replaceChildren(target);
+          imgThree.setAttribute('src', '../assets/images/three.png');
+          imgThree.setAttribute('class', 'temp');
+          imgThree.setAttribute('data-img', 'three');
+          e.target.replaceChildren(imgThree);
           player.checkWin(players);
         } else {
           player.checkIfScore(score, players);
