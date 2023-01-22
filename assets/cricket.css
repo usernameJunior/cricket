@@ -9,39 +9,67 @@
 }
 
 body {
+  background-color: black;
+  color: white;
   font-family: sans-serif;
   font-weight: bold;
 }
 
 #cricket-container {
-  border: 2px solid black;
+  background-color: rgb(38, 38, 38);
   display: flex;
   justify-content: center;
+  align-items: center;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  height: 100vh;
   margin: 0 auto;
-  text-align: center;
+  padding: 0 1em;
+  gap: 1vh;
 }
 #cricket-container .legend-container,
 #cricket-container .player-container {
   display: grid;
-  grid-template-rows: 4vh repeat(7, 13vh) 4vh;
+  row-gap: 1vh;
+  grid-template-rows: 5vh repeat(7, 11vh) 5vh;
 }
 #cricket-container .legend-container {
-  width: 3em;
+  font-size: 1.7em;
 }
 #cricket-container .player-container img {
-  height: 100%;
+  height: 90%;
   width: auto;
+  pointer-events: none;
 }
 #cricket-container .legend-cell,
 #cricket-container .player-cell {
-  border: 1px solid blue;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+#cricket-container .legend-cell {
+  padding-right: 0.4em;
+}
 #cricket-container .player-cell {
-  width: 150px;
+  background-color: rgb(19, 19, 19);
+  width: 15vh;
+  border-radius: 2em;
+  transition: all 0.3s ease;
+}
+#cricket-container .player-cell:first-of-type {
+  background-color: initial;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#cricket-container .player-cell:last-of-type {
+  font-size: 1.7em;
+  color: red;
+}
+#cricket-container .blink {
+  background-color: rgba(255, 0, 0, 0.7);
+  scale: 1.5;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+  transition: all 1ms ease;
 }/*# sourceMappingURL=cricket.css.map */

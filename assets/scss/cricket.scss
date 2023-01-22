@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 *{
   margin: 0px;
   padding: 0px;
@@ -6,45 +8,70 @@
 }
 
 body {
-  // background-color: black;
-  // color: white;
+  background-color: $black;
+  color: white;
   font-family: sans-serif;
   font-weight: bold;
 }
 
 #cricket-container {
-  border: 2px solid black;
+  background-color: $gray;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: fit-content;
+  height: 100vh;
   margin: 0 auto;
-  text-align: center;
+  padding: 0 1em;
+  gap: 1vh; // space between columns
 
   .legend-container,
   .player-container {
     display: grid;
-    grid-template-rows: 4vh repeat(7, 13vh) 4vh;
+    row-gap: 1vh;
+    grid-template-rows: 5vh repeat(7, 11vh) 5vh;
   }
   .legend-container {
-    width: 3em;
-
+    font-size: 1.7em;
   }
+  .player-container {
 
-  .player-container img {
-    height: 100%;
-    width: auto;
+    img {
+      height: 90%;
+      width: auto;
+      pointer-events: none;
+    }
   }
 
   .legend-cell,
   .player-cell {
-    border: 1px solid blue;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .legend-cell {
+    padding-right: .4em;
   }
   .player-cell {
-    width: 150px;
+    background-color: $darkgray;
+    width: 15vh;
+    border-radius: 2em;
+    transition: all .3s ease;
+  }
+  .player-cell:first-of-type {
+    background-color: initial;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .player-cell:last-of-type {
+    font-size: 1.7em;
+    color: red;
+  }
+  .blink {
+    background-color: $red-transp;
+    scale: 1.5;
+    box-shadow: 0 0 20px $red-transp;
+    transition: all 1ms ease;
   }
 }

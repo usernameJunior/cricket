@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../assets/cricket.css" rel="stylesheet">
+  <link href="../assets/style.css" rel="stylesheet">
   <title>Cricket</title>
 
   <?php
@@ -42,9 +42,9 @@
         return subtotals.reduce((total, current) => total + current, 0);
       }
 
-      checkIfScore(score, players) {
+      checkIfScore(cell, score, players) {
         if (this.checkRow(score, players)) {
-          this.updateScore(score)
+          this.updateScore(cell, score)
         }
         // TODO: check if player has won
         this.checkWin(players);
@@ -56,9 +56,21 @@
         return rowScores.filter(nbr => nbr < 3).length ? true : false
       }
 
-      updateScore(score) {
+      updateScore(cell, score) {
         this.scores[score] += 1;
-        if (this.scores[score] > 3) { this.scoreCell.innerHTML = this.totalScore; }
+        plateau.container.removeEventListener('click', plateau.clickScore);
+        cell.classList.add('blink');
+        setTimeout(() => {
+          cell.classList.remove('blink');
+          plateau.container.addEventListener('click', plateau.clickScore);
+        }, 150);
+        if (this.scores[score] > 3) {
+          this.scoreCell.innerHTML = this.totalScore;
+          this.scoreCell.classList.add('blink');
+          setTimeout(() => {
+            this.scoreCell.classList.remove('blink');
+          }, 150);
+        }
       }
 
       checkWin(players) {
@@ -86,7 +98,8 @@
       }
       
       set_legend() {
-        let cells = ['', '15', '16', '17', '18', '19', '20', 'B', '']
+        // cells in displaying order
+        let cells = ['', '20', '19', '18', '17', '16', '15', 'B', '']
         let legendContainer = document.createElement('div');
         legendContainer.setAttribute('class', 'legend-container');
         cells.forEach(cell => {
@@ -94,7 +107,6 @@
           elt.setAttribute('class', 'legend-cell');
           elt.innerHTML = `<p>${cell}</p>`;
           legendContainer.appendChild(elt);
-          // this.container.appendChild(elt);
         });
         this.container.appendChild(legendContainer);
       }
@@ -108,15 +120,13 @@
           playerName.setAttribute('class', 'player-cell');
           playerName.innerHTML = player.name;
           playerContainer.appendChild(playerName);
-          // this.container.appendChild(playerName);
           
-          Object.keys(player.scores).forEach(score => {
+          ['20', '19', '18', '17', '16', '15', '25'].forEach(score => {
             let elt = document.createElement('div');
             elt.setAttribute('data-playerid', id);
             elt.setAttribute('data-score', score);
             elt.setAttribute('class', 'player-cell');
             playerContainer.appendChild(elt);
-            // this.container.appendChild(elt);
           });
 
           let playerScore = document.createElement('div');
@@ -125,7 +135,6 @@
           playerScore.innerHTML = player.totalScore;
           player.scoreCell = playerScore;
           playerContainer.appendChild(playerScore);
-          // this.container.appendChild(playerScore);
           
           this.container.appendChild(playerContainer);
         });
@@ -138,30 +147,24 @@
         // would eventually be clearer and remove need of data-img attribute
         let player = players[e.target.dataset.playerid];
         let score = e.target.dataset.score
-        if (!e.target.firstChild) {
+        if (player.scores[score] == 0) {
           let imgOne = document.createElement('img');
-          player.updateScore(score);
+          player.updateScore(e.target, score);
           imgOne.setAttribute('src', '../assets/images/one.png');
-          imgOne.setAttribute('class', 'temp');
-          imgOne.setAttribute('data-img', 'one');
           e.target.appendChild(imgOne);
-        } else if (e.target.firstChild.dataset.img == 'one') {
+        } else if (player.scores[score] == 1) {
           let imgTwo = document.createElement('img');
-          player.updateScore(score);
+          player.updateScore(e.target, score);
           imgTwo.setAttribute('src', '../assets/images/two.png');
-          imgTwo.setAttribute('class', 'temp');
-          imgTwo.setAttribute('data-img', 'two');
           e.target.replaceChildren(imgTwo);
-        } else if (e.target.firstChild.dataset.img == 'two') {
+        } else if (player.scores[score] == 2) {
           let imgThree = document.createElement('img');
-          player.updateScore(score);
+          player.updateScore(e.target, score);
           imgThree.setAttribute('src', '../assets/images/three.png');
-          imgThree.setAttribute('class', 'temp');
-          imgThree.setAttribute('data-img', 'three');
           e.target.replaceChildren(imgThree);
           player.checkWin(players);
         } else {
-          player.checkIfScore(score, players);
+          player.checkIfScore(e.target, score, players);
         }
       }
     }
