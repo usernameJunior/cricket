@@ -1,31 +1,47 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+body {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
 #cricket-container {
-  margin: auto;
-  border: 3px solid blue;
+  border: 2px solid black;
   display: flex;
-  justify-content: space-around;
-  height: 90vh;
-  max-width: 800px;
+  justify-content: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
 }
-
-.legend-container,
-.player-container {
+#cricket-container .legend-container,
+#cricket-container .player-container {
+  display: grid;
+  grid-template-rows: 4vh repeat(7, 13vh) 4vh;
+}
+#cricket-container .legend-container {
+  width: 3em;
+}
+#cricket-container .player-container img {
+  height: 100%;
+  width: auto;
+}
+#cricket-container .legend-cell,
+#cricket-container .player-cell {
+  border: 1px solid blue;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.legend-container {
-  flex: 0;
-}
-.player-container {
-  border: 1px solid black;
-  flex: 1;
-}
-
-.legend-cell,
-.player-cell {
-  border: 1px solid lightgray;
-  flex: 1;
-}
-
-.temp {
-  height: 50px;
-}
+#cricket-container .player-cell {
+  width: 150px;
+}/*# sourceMappingURL=cricket.css.map */
