@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../assets/cricket.css" rel="stylesheet">
+  <link href="../assets/cricket_test.css" rel="stylesheet">
   <title>Cricket</title>
 
   <?php
   // Found no better way to access file content with JS
+  $players_file = '../data/players.json';
+  $players = json_decode(file_get_contents($players_file));
   function writePlayersArrayForJS() {
-    $players_file = '../data/players.json';
-    $players = json_decode(file_get_contents($players_file));
       echo '[';
-    foreach ($players as $i => $player) {
+    foreach ($GLOBALS['players'] as $i => $player) {
       echo '"' . $player . '"';
-      if ($i != sizeof($players) - 1) { echo ','; }
+      if ($i != sizeof($GLOBALS['players']) - 1) { echo ','; }
     }
     echo ']';
   }
@@ -24,7 +24,6 @@
 
 <body>
   <div id="cricket-container">
-    
   </div>
 
   <script>
@@ -93,8 +92,9 @@
         cells.forEach(cell => {
           let elt = document.createElement('div');
           elt.setAttribute('class', 'legend-cell');
-          elt.innerHTML = cell;
+          elt.innerHTML = `<p>${cell}</p>`;
           legendContainer.appendChild(elt);
+          // this.container.appendChild(elt);
         });
         this.container.appendChild(legendContainer);
       }
@@ -108,6 +108,7 @@
           playerName.setAttribute('class', 'player-cell');
           playerName.innerHTML = player.name;
           playerContainer.appendChild(playerName);
+          // this.container.appendChild(playerName);
           
           Object.keys(player.scores).forEach(score => {
             let elt = document.createElement('div');
@@ -115,6 +116,7 @@
             elt.setAttribute('data-score', score);
             elt.setAttribute('class', 'player-cell');
             playerContainer.appendChild(elt);
+            // this.container.appendChild(elt);
           });
 
           let playerScore = document.createElement('div');
@@ -123,6 +125,7 @@
           playerScore.innerHTML = player.totalScore;
           player.scoreCell = playerScore;
           playerContainer.appendChild(playerScore);
+          // this.container.appendChild(playerScore);
           
           this.container.appendChild(playerContainer);
         });

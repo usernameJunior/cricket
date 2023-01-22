@@ -1,0 +1,48 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+#cricket-container {
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+
+  .legend-container,
+  .player-container {
+    display: grid;
+    grid-template-rows: 4vh repeat(7, 13vh) 4vh;
+  }
+  .legend-container {
+    width: 3em;
+
+  }
+
+  .player-container img {
+    height: 100%;
+    width: auto;
+  }
+
+  .legend-cell,
+  .player-cell {
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .legend-cell {
+  }
+  .player-cell {
+    width: 150px;
+  }
+}
