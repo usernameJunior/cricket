@@ -85,10 +85,17 @@
   <form action="controllers/set_players.php"
         method="post">
     <div id="players-container">
-      <script> generatePlayerForm(); </script>
+      <script>
+        // TODO: player number displaying right
+        // - Use AJAX to update players file in real time
+        //   and display in page without refresh ??
+        generatePlayerForm();
+      </script>
     </div>
     <input type="submit" value="Jouer">
-    <button id="add-player-btn" type="button">Ajouter un joueur</button>
+    <button id="add-player-btn" type="button">
+      Ajouter un joueur
+    </button>
   </form>
   
 
