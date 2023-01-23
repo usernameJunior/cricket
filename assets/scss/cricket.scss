@@ -32,7 +32,11 @@ body {
     grid-template-rows: 5vh repeat(7, 11vh) 5vh;
   }
   .legend-container {
+    background-color: inherit;
+    padding-right: .4em;
     font-size: 1.7em;
+    position: sticky;
+    left: 0;
   }
   .player-container {
 
@@ -50,7 +54,6 @@ body {
     align-items: center;
   }
   .legend-cell {
-    padding-right: .4em;
   }
   .player-cell {
     background-color: $darkgray;
@@ -64,12 +67,16 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    border-radius: initial;
+    border-radius: 0;
     text-align: center;
+    font-size: 1.2em;
   }
   .player-cell:last-of-type {
     font-size: 1.7em;
     color: red;
+    position: absolute;
+    bottom: 1vh;
+    border-radius: 0;
   }
   .blink {
     background-color: $red-transp;

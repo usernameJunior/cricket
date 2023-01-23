@@ -35,7 +35,12 @@ body {
   grid-template-rows: 5vh repeat(7, 11vh) 5vh;
 }
 #cricket-container .legend-container {
+  background-color: inherit;
+  padding-right: 0.4em;
   font-size: 1.7em;
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
 }
 #cricket-container .player-container img {
   height: 90%;
@@ -47,9 +52,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-#cricket-container .legend-cell {
-  padding-right: 0.4em;
 }
 #cricket-container .player-cell {
   background-color: rgb(19, 19, 19);
@@ -63,12 +65,16 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  border-radius: initial;
+  border-radius: 0;
   text-align: center;
+  font-size: 1.2em;
 }
 #cricket-container .player-cell:last-of-type {
   font-size: 1.7em;
   color: red;
+  position: absolute;
+  bottom: 1vh;
+  border-radius: 0;
 }
 #cricket-container .blink {
   background-color: rgba(255, 0, 0, 0.7);
