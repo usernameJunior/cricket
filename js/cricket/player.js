@@ -12,13 +12,6 @@ class Player {
     return subtotals.reduce((total, current) => total + current, 0);
   }
 
-  checkIfScore(cell, score, players) {
-    if (this.checkRow(score, players)) {
-      this.updateScore(cell, score)
-    }
-    this.checkWin(players);
-  }
-
   // Returns true if one cell or more of the row is 'open' (score < 3)
   checkRow(score, players) {
     let rowScores = players.map(player => player.scores[score]);
@@ -27,14 +20,17 @@ class Player {
 
   updateScore(cell, score) {
     this.scores[score] += 1;
-    plateau.container.removeEventListener('click', plateau.clickScore);
+
+    plateau.container.onclick = null;
     cell.classList.add('blink');
+    // settimeout is to prevent unwanted double clicks
     setTimeout(() => {
       cell.classList.remove('blink');
-      plateau.container.addEventListener('click', plateau.clickScore);
+      plateau.container.onclick = this.checkWin(players) ? null : plateau.clickScore;
     }, 150);
     if (this.scores[score] > 3) {
       this.scoreCell.innerHTML = this.totalScore;
+      
       this.scoreCell.classList.add('blink');
       setTimeout(() => {
         this.scoreCell.classList.remove('blink');
@@ -44,15 +40,13 @@ class Player {
 
   checkWin(players) {
     // check if all cells are closed for player
-    // And if no one has an equal or better totalScore
     if ((!Object.values(this.scores).filter(nbr => nbr < 3).length) &&
+    // And if no one has an equal or better totalScore
         (players.map(player => player.totalScore)
                 .filter(tot => tot >= this.totalScore)
                 .length == 1)) {
-      // DOESNT WORK ANYMORE
-      // DONT KNOW WHY
-      plateau.container.removeEventListener('click', plateau.clickScore);
-      alert(`${this.name.toUpperCase()} A GAGNEEEEEE !!!`);
+      return true;
     }
+    return false;
   }
 }

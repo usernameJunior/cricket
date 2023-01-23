@@ -1,14 +1,14 @@
 class Plateau {
-  container = document.getElementById('cricket-container');
     
   constructor() {
+    this.container = document.getElementById('cricket-container');
+    this.container.onclick = this.clickScore;
     this.set_legend(); // sets legend column
     this.set_players(); // sets each player's column
-    this.container.addEventListener('click', this.clickScore);
   }
   
   set_legend() {
-    // cells in displaying order
+    // cells are in displaying order here, up to bottom
     let cells = ['', '20', '19', '18', '17', '16', '15', 'B', '']
     let legendContainer = document.createElement('div');
     legendContainer.setAttribute('class', 'legend-container');
@@ -55,24 +55,30 @@ class Plateau {
     
     let player = players[e.target.dataset.playerid];
     let score = e.target.dataset.score
+    // if score is 0, update & set image one
     if (player.scores[score] == 0) {
       let imgOne = document.createElement('img');
-      player.updateScore(e.target, score);
       imgOne.setAttribute('src', '../assets/images/one.png');
       e.target.appendChild(imgOne);
+      player.updateScore(e.target, score);
+      // if score is 1, update & set image two
     } else if (player.scores[score] == 1) {
       let imgTwo = document.createElement('img');
-      player.updateScore(e.target, score);
       imgTwo.setAttribute('src', '../assets/images/two.png');
       e.target.replaceChildren(imgTwo);
+      player.updateScore(e.target, score);
+      // if score is 2, update & set image three
     } else if (player.scores[score] == 2) {
       let imgThree = document.createElement('img');
-      player.updateScore(e.target, score);
       imgThree.setAttribute('src', '../assets/images/three.png');
       e.target.replaceChildren(imgThree);
-      player.checkWin(players);
-    } else {
-      player.checkIfScore(e.target, score, players);
+      player.updateScore(e.target, score);
+      // else, update score if row is not closed
+    } else if (player.checkRow(score, players)) {
+        player.updateScore(e.target, score);
+    }
+    if (player.scores[score] >= 3 && player.checkWin(players)) {
+      alert(`${player.name.toUpperCase()} A GAGNEEEEEE !!!`);
     }
   }
 }
