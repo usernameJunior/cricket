@@ -60,9 +60,12 @@ body {
   }
   .player-cell:first-of-type {
     background-color: initial;
+    display: inline;
+    text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    border-radius: initial;
+    text-align: center;
   }
   .player-cell:last-of-type {
     font-size: 1.7em;

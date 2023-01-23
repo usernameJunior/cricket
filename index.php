@@ -20,13 +20,13 @@
 <body>
   <h1>Joueurs</h1>
 
-  <form action="php/home/set_players.php"
+  <form action="php/set_players.php"
         method="post">
     <div id="players-container">
       <script>
         // TODO: player number displaying right
         // - Use AJAX to update players file in real time
-        //   and display in page without refresh ??
+        //   and display in page without refresh ?
         generatePlayerForm();
       </script>
     </div>

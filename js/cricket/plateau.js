@@ -53,8 +53,6 @@ class Plateau {
   clickScore(e) {
     if (!e.target.dataset.score) { return }
     
-    // TODO: replace conditions with score from player ?
-    // would eventually be clearer and remove need of data-img attribute
     let player = players[e.target.dataset.playerid];
     let score = e.target.dataset.score
     if (player.scores[score] == 0) {
