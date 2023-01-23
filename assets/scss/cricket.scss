@@ -83,16 +83,3 @@ body {
     transition: all 1ms ease;
   }
 }
-
-#winner {
-  display: none;
-  height: 100vh;
-  width: 100%;
-
-  p {
-    margin: auto;
-    text-align: center;
-    background-color: white;
-    color: red;
-  }
-}
