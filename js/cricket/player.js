@@ -16,7 +16,6 @@ class Player {
     if (this.checkRow(score, players)) {
       this.updateScore(cell, score)
     }
-    // TODO: check if player has won
     this.checkWin(players);
   }
 
@@ -50,8 +49,10 @@ class Player {
         (players.map(player => player.totalScore)
                 .filter(tot => tot >= this.totalScore)
                 .length == 1)) {
+      // DOESNT WORK ANYMORE
+      // DONT KNOW WHY
+      plateau.container.removeEventListener('click', plateau.clickScore);
       alert(`${this.name.toUpperCase()} A GAGNEEEEEE !!!`);
-      plateau.container.removeEventListener('click', plateau.clickScore)
     }
   }
 }
