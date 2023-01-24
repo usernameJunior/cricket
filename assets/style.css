@@ -15,16 +15,27 @@ body {
   font-weight: bold;
 }
 
-.player-container {
+h1, h2 {
+  text-align: center;
+  padding: 0.3em 0;
+}
+
+#players-container,
+.players-form {
   display: flex;
-  align-items: center;
-  margin: 1em;
+  flex-direction: column;
+  gap: 1em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
-.player-container label {
-  font-size: 1.1em;
-  font-weight: normal;
+
+.players-form {
+  margin-top: 1em;
 }
-.player-container input[type=text] {
+.players-form input[type=text] {
   background-color: rgb(38, 38, 38);
   color: white;
   border: none;
@@ -33,18 +44,45 @@ body {
   font-weight: bold;
   font-size: inherit;
 }
-.player-container input[type=text]:focus {
+.players-form input[type=text].new-player-input {
+  background-color: rgb(38, 38, 38);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.players-form input[type=submit] {
+  background-color: rgba(255, 0, 0, 0.7);
+  border: 2px solid transparent;
+  color: black;
+  border-radius: 2em;
+  padding: 0.5em 0;
+  margin-top: 1em;
+  font-size: inherit;
+  font-weight: inherit;
+  transition: all 0.1s;
+}
+.players-form input[type=submit]:hover {
+  border: 2px solid rgba(255, 0, 0, 0.7);
+  background-color: transparent;
+  color: rgba(255, 0, 0, 0.7);
+  transition: all 0.1s;
+}
+
+#players-container .player-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+#players-container .player-container input[type=text]:focus {
   color: red;
-  border: none;
   outline: none;
 }
-.player-container .delete-player-btn {
+#players-container .player-container .delete-player-btn {
   display: inline;
-  border: 1px solid black;
-  border-radius: 3px;
-  padding: 0 0.4em;
 }
-.player-container .delete-player-btn:hover {
+#players-container .player-container .delete-player-btn:hover {
   color: red;
   cursor: pointer;
 }

@@ -28,7 +28,9 @@
 
   <h2>Joueurs :</h2>
 
-  <form action="php/set_players.php" method="post">
+  <form class="players-form"
+        action="php/set_players.php"
+        method="post">
     <div id="players-container">
       <script>
         // TODO: player number displaying right
@@ -37,16 +39,15 @@
         generatePlayerForm();
       </script>
     </div>
-    <button class="add-player-btn" type="button">
-      Ajouter un joueur
-    </button>
+
+    <input type="text" class="new-player-input" placeholder="Nouveau joueur...">
     <input type="submit" value="Jouer">
   </form>
   
 
   <script>
-    const newPlayerBtn = document.getElementById('add-player-btn');
-    newPlayerBtn.addEventListener('click', (e) => {
+    const addPlayerBtn = document.querySelector('.new-player-input');
+    addPlayerBtn.addEventListener('click', (e) => {
       addPlayer();
     });
   </script>

@@ -13,10 +13,6 @@ function addPlayer(name = '') {
 
   const playerContainer = document.createElement("div");
   playerContainer.classList.add('player-container');
-  
-  const label = document.createElement("label");
-  label.setAttribute("for", `player${playerNbr}`);
-  label.innerText = `Joueur ${playerNbr} : `;
 
   const input = document.createElement("input");
   input.setAttribute("type", "text");
@@ -33,13 +29,15 @@ function addPlayer(name = '') {
   
   const br = document.createElement("br");
   
-  playerContainer.appendChild(label);
   playerContainer.appendChild(input);
   playerContainer.appendChild(deletePlayerBtn);
   playerContainer.appendChild(br);
 
   const container = document.getElementById('players-container');
   container.appendChild(playerContainer);
+
+  // focus on new player input if created by user
+  if (playerNbr > players.length) { input.focus(); }
 }
 
 function deletePlayer(event, btn) {
