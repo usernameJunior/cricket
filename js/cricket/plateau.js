@@ -78,7 +78,14 @@ class Plateau {
         player.updateScore(e.target, score);
     }
     if (player.scores[score] >= 3 && player.checkWin(players)) {
-      alert(`${player.name.toUpperCase()} A GAGNEEEEEE !!!`);
+      plateau.endGame(player);
     }
+  }
+
+  endGame(player) {
+    let winner = document.querySelector('#winner');
+    let message = document.querySelector('#winner p.message');
+    message.innerHTML = `${player.name} a gagné avec ${player.totalScore} points !!!`;
+    winner.style.zIndex = '1000';
   }
 }
