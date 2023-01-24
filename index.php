@@ -24,7 +24,7 @@
 </head>
 
 <body>
-  <h1>Cricket</h1>
+  <h1>Jeu de Cricket</h1>
 
   <h2>Joueurs :</h2>
 
