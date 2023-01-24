@@ -1,3 +1,2 @@
-target.xcf
-target2.xcf
-target3.xcf
+*.xcf
+favicon.png
