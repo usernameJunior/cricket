@@ -12,6 +12,7 @@ function addPlayer(name = '') {
   playerNbr += 1;
 
   const playerContainer = document.createElement("div");
+  playerContainer.classList.add('player-container');
   
   const label = document.createElement("label");
   label.setAttribute("for", `player${playerNbr}`);

@@ -28,8 +28,7 @@
 
   <h2>Joueurs :</h2>
 
-  <form action="php/set_players.php"
-        method="post">
+  <form action="php/set_players.php" method="post">
     <div id="players-container">
       <script>
         // TODO: player number displaying right
@@ -38,10 +37,10 @@
         generatePlayerForm();
       </script>
     </div>
-    <input type="submit" value="Jouer">
-    <button id="add-player-btn" type="button">
+    <button class="add-player-btn" type="button">
       Ajouter un joueur
     </button>
+    <input type="submit" value="Jouer">
   </form>
   
 

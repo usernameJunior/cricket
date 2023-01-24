@@ -1,2 +1,120 @@
-@import 'homepage.css';
-@import 'cricket.css';
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.player-container {
+  display: flex;
+  align-items: center;
+  margin: 1em;
+}
+.player-container label {
+  font-size: 1.1em;
+  font-weight: normal;
+}
+.player-container input[type=text] {
+  background-color: rgb(38, 38, 38);
+  color: white;
+  border: none;
+  border-radius: 1em;
+  padding: 0.5em 1.3em;
+  font-weight: bold;
+  font-size: inherit;
+}
+.player-container input[type=text]:focus {
+  color: red;
+  border: none;
+  outline: none;
+}
+.player-container .delete-player-btn {
+  display: inline;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 0 0.4em;
+}
+.player-container .delete-player-btn:hover {
+  color: red;
+  cursor: pointer;
+}
+
+#cricket-container {
+  background-color: rgb(38, 38, 38);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0 1em;
+  gap: 1vh;
+}
+#cricket-container .legend-container,
+#cricket-container .player-container {
+  display: grid;
+  row-gap: 1vh;
+  grid-template-rows: 5vh repeat(7, 11vh) 5vh;
+}
+#cricket-container .legend-container {
+  background-color: inherit;
+  padding-right: 0.4em;
+  font-size: 1.7em;
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+}
+#cricket-container .player-container img {
+  height: 90%;
+  width: auto;
+  pointer-events: none;
+}
+#cricket-container .legend-cell,
+#cricket-container .player-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cricket-container .player-cell {
+  background-color: rgb(19, 19, 19);
+  width: 15vh;
+  border-radius: 2em;
+  transition: all 0.3s ease;
+}
+#cricket-container .player-cell:first-of-type {
+  background-color: initial;
+  display: inline;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 0;
+  text-align: center;
+  font-size: 1.2em;
+}
+#cricket-container .player-cell:last-of-type {
+  font-size: 1.7em;
+  color: red;
+  border-radius: 0;
+  margin-top: 1vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+#cricket-container .blink {
+  background-color: rgba(255, 0, 0, 0.7);
+  scale: 1.5;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+  transition: all 1ms ease;
+}/*# sourceMappingURL=style.css.map */

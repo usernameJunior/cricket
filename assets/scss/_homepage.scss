@@ -1,0 +1,39 @@
+#players-container {
+  // USELESS ??
+}
+
+.player-container {
+  display: flex;
+  align-items: center;
+  margin: 1em;
+
+  label {
+    font-size: 1.1em;
+    font-weight: normal;
+  }
+  input[type='text'] {
+    background-color: $gray;
+    color: white;
+    border: none;
+    border-radius: 1em;
+    padding: .5em 1.3em;
+    font-weight: bold;
+    font-size: inherit;
+  }
+  input[type='text']:focus {
+    color: red;
+    border: none;
+    outline: none;
+  }
+
+  .delete-player-btn {
+    display: inline;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 0 .4em
+  }
+  .delete-player-btn:hover {
+    color: red;
+    cursor: pointer;
+  } 
+}
