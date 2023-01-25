@@ -29,5 +29,6 @@
                   .map(name => new Player(name));
     plateau = new Plateau();
   </script>
+  <!--
 </body>
 </html>
