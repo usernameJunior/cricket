@@ -31,7 +31,7 @@ A savoir : il est impossible d'annuler une action en cas d'erreur.
 
 L'application est mise en ligne sur Hostinger en tant que démo : **elle n'est pas conçue pour être utilisée par plusieurs utilisateurs à la fois**.
 <!-- TODO -->
-[Cricket](https://www.perdu.com/) (à venir)
+[Cricket](https://dossierg.000webhostapp.com/projects/cricket/)
 
 ### Nota bene
 
